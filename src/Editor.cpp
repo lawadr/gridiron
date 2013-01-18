@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 		root->loadPlugin("RenderSystem_GL_d");
 		//root->loadPlugin("RenderSystem_Direct3D9_d");
 	#else
-		root_->loadPlugin("RenderSystem_GL");
+		root->loadPlugin("RenderSystem_GL");
 		//root_->loadPlugin("RenderSystem_Direct3D9");
 	#endif
 	const Ogre::RenderSystemList& renderSystemList = root->getAvailableRenderers();
