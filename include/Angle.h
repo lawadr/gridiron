@@ -11,94 +11,94 @@ See LICENSE in root directory.
 #include <OGRE/OgreMath.h>
 
 class Angle {
-	public:
-		Angle()
-			: mIndex(0)
-		{
-		}
-	
-		Angle(char index)
-			: mIndex(index & 0x03)
-		{
-		}
+public:
+    Angle()
+        : mIndex(0)
+    {
+    }
 
-		Angle(Ogre::Degree degrees) {
-			from(degrees);
-		}
+    Angle(char index)
+        : mIndex(index & 0x03)
+    {
+    }
 
-		Angle(Ogre::Radian radians) {
-			from(radians);
-		}
+    Angle(Ogre::Degree degrees) {
+        from(degrees);
+    }
 
-		Angle& operator+=(const Angle& angle) {
-			mIndex += angle.mIndex;
-			mIndex &= 0x03;
-			return *this;
-		}
+    Angle(Ogre::Radian radians) {
+        from(radians);
+    }
 
-		Angle& operator-=(const Angle& angle) {
-			mIndex -= angle.mIndex;
-			mIndex &= 0x03;
-			return *this;
-		}
+    Angle& operator+=(const Angle& angle) {
+        mIndex += angle.mIndex;
+        mIndex &= 0x03;
+        return *this;
+    }
 
-		Angle& operator++() {
-			return *this += Angle(1);
-		}
+    Angle& operator-=(const Angle& angle) {
+        mIndex -= angle.mIndex;
+        mIndex &= 0x03;
+        return *this;
+    }
 
-		Angle& operator++(int) {
-			return *this += Angle(1);
-		}
+    Angle& operator++() {
+        return *this += Angle(1);
+    }
 
-		Angle& operator--() {
-			return *this -= Angle(1);
-		}
+    Angle& operator++(int) {
+        return *this += Angle(1);
+    }
 
-		Angle& operator--(int) {
-			return *this -= Angle(1);
-		}
+    Angle& operator--() {
+        return *this -= Angle(1);
+    }
 
-		const Angle operator+(const Angle& angle) const {
-			Angle result = *this;
-			result += angle;
-			return result;
-		}
+    Angle& operator--(int) {
+        return *this -= Angle(1);
+    }
 
-		const Angle operator-(const Angle& angle) const {
-			Angle result = *this;
-			result -= angle;
-			return result;
-		}
+    const Angle operator+(const Angle& angle) const {
+        Angle result = *this;
+        result += angle;
+        return result;
+    }
 
-		Ogre::Degree toDegrees() const {
-			return Ogre::Degree(mIndex * 90.0f);
-		}
+    const Angle operator-(const Angle& angle) const {
+        Angle result = *this;
+        result -= angle;
+        return result;
+    }
 
-		Ogre::Radian toRadians() const {
-			return Ogre::Radian(toDegrees());
-		}
+    Ogre::Degree toDegrees() const {
+        return Ogre::Degree(mIndex * 90.0f);
+    }
 
-		void rotate(QPoint& point) const {
-			static int matrices[4][2][2] = {{{1, 0}, {0, 1}}, {{0, -1}, {1, 0}}, {{-1, 0}, {0, -1}}, {{0, 1}, {-1, 0}}};
+    Ogre::Radian toRadians() const {
+        return Ogre::Radian(toDegrees());
+    }
 
-			QPoint newPoint;
-			newPoint.setX(matrices[mIndex][0][0] * point.x() + matrices[mIndex][0][1] * point.y());
-			newPoint.setY(matrices[mIndex][1][0] * point.x() + matrices[mIndex][1][1] * point.y());
-			point = newPoint;
-		}
+    void rotate(QPoint& point) const {
+        static int matrices[4][2][2] = {{{1, 0}, {0, 1}}, {{0, -1}, {1, 0}}, {{-1, 0}, {0, -1}}, {{0, 1}, {-1, 0}}};
 
-	private:
-		char mIndex;
+        QPoint newPoint;
+        newPoint.setX(matrices[mIndex][0][0] * point.x() + matrices[mIndex][0][1] * point.y());
+        newPoint.setY(matrices[mIndex][1][0] * point.x() + matrices[mIndex][1][1] * point.y());
+        point = newPoint;
+    }
 
-		void from(Ogre::Degree degrees) {
-			static float multiplier = 1 / 90.0f;
-			mIndex = static_cast<char>((degrees.valueDegrees() + 45.0f) * multiplier);
-			mIndex &= 0x03;
-		}
+private:
+    char mIndex;
 
-		void from(Ogre::Radian radians) {
-			from(Ogre::Degree(radians));
-		}
+    void from(Ogre::Degree degrees) {
+        static float multiplier = 1 / 90.0f;
+        mIndex = static_cast<char>((degrees.valueDegrees() + 45.0f) * multiplier);
+        mIndex &= 0x03;
+    }
+
+    void from(Ogre::Radian radians) {
+        from(Ogre::Degree(radians));
+    }
 };
 
 #endif

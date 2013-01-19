@@ -10,19 +10,19 @@ See LICENSE in root directory.
 class Object;
 
 class SelectionTool : public Tool {
-	public:
-		SelectionTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
+public:
+    SelectionTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
 
-		void activate();
-		void deactivate();
-		
-		bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    void activate();
+    void deactivate();
 
-	private:
-		MapGeometry* mMapGeometry;
-		QSet<Object*> mSelection;
+    bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
 
-		bool mMoving;
+private:
+    MapGeometry* mMapGeometry;
+    QSet<Object*> mSelection;
+
+    bool mMoving;
 };

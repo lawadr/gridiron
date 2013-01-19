@@ -13,18 +13,18 @@ class Tile;
 class QXmlStreamWriter;
 
 class MapWriter {
-	public:
-		MapWriter();
-		~MapWriter();
-		
-		bool write(const Map* map, QString path);
+public:
+    MapWriter();
+    ~MapWriter();
 
-	private:
-		void writeProperty(const Property& prop, QXmlStreamWriter& writer);
-		void writeProperties(const PropertyList& properties, QXmlStreamWriter& writer);
+    bool write(const Map* map, QString path);
 
-		void writeTile(const Tile& tile, QXmlStreamWriter& writer);
-		void writeTileSet(const TileSet& tileSet, QXmlStreamWriter& writer);
+private:
+    void writeProperty(const Property& prop, QXmlStreamWriter& writer);
+    void writeProperties(const PropertyList& properties, QXmlStreamWriter& writer);
 
-		void writeCells(const Map* map, QXmlStreamWriter& writer);
+    void writeTile(const Tile& tile, QXmlStreamWriter& writer);
+    void writeTileSet(const TileSet& tileSet, QXmlStreamWriter& writer);
+
+    void writeCells(const Map* map, QXmlStreamWriter& writer);
 };

@@ -10,28 +10,28 @@ class Map;
 class QUndoStack;
 
 class MapDocument : public QObject {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		MapDocument();
-		MapDocument(Map* map);
-		~MapDocument();
+public:
+    MapDocument();
+    MapDocument(Map* map);
+    ~MapDocument();
 
-		bool isModified() const;
+    bool isModified() const;
 
-		Map* getMap() const;
+    Map* getMap() const;
 
-		QUndoStack* getUndoStack() const;
+    QUndoStack* getUndoStack() const;
 
-		QString getFileName() const;
-		void setFileName(QString fileName);
+    QString getFileName() const;
+    void setFileName(QString fileName);
 
-		bool save();
+    bool save();
 
-	private:
-		Map* map_;
-		QUndoStack* undoStack_;
+private:
+    Map* map_;
+    QUndoStack* undoStack_;
 
-		bool isModified_;
-		QString fileName_;
+    bool isModified_;
+    QString fileName_;
 };

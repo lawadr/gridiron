@@ -10,39 +10,39 @@ See LICENSE in root directory.
 class Type;
 
 class ObjectTool : public Tool {
-	public:
-		ObjectTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
-		~ObjectTool();
+public:
+    ObjectTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
+    ~ObjectTool();
 
-		Type* type() const;
-		void setType(Type* type);
+    Type* type() const;
+    void setType(Type* type);
 
-		void activate();
-		void deactivate();
-		
-		bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    void activate();
+    void deactivate();
 
-	private:
-		Type* mType;
+    bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
 
-		MapGeometry* mMapGeometry;
+private:
+    Type* mType;
 
-		Ogre::SceneNode* mNode;
-		Ogre::SceneNode* mNode2;
-		Ogre::Entity* mObject;
+    MapGeometry* mMapGeometry;
 
-		QPoint mPosition;
-		Angle mAngle;
+    Ogre::SceneNode* mNode;
+    Ogre::SceneNode* mNode2;
+    Ogre::Entity* mObject;
 
-		void realign() const;
+    QPoint mPosition;
+    Angle mAngle;
 
-		bool collisionCheck(const QRect& bounds) const;
+    void realign() const;
 
-		bool isOutsideMap(const QRect& bounds) const;
-		bool floorCollisionCheck(const QRect& bounds) const;
-		bool wallCollisionCheck(const QRect& bounds) const;
-		bool objectCollisionCheck(const QRect& bounds) const;
+    bool collisionCheck(const QRect& bounds) const;
+
+    bool isOutsideMap(const QRect& bounds) const;
+    bool floorCollisionCheck(const QRect& bounds) const;
+    bool wallCollisionCheck(const QRect& bounds) const;
+    bool objectCollisionCheck(const QRect& bounds) const;
 };
 

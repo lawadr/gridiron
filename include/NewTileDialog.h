@@ -12,14 +12,14 @@ class QLineEdit;
 class QComboBox;
 
 class NewTileDialog : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		NewTileDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+public:
+    NewTileDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-		Tile* createTile(TileSet* tileSet);
+    Tile* createTile(TileSet* tileSet);
 
-	private:
-		QLineEdit* mName;
-		QComboBox* mMaterial;
+private:
+    QLineEdit* mName;
+    QComboBox* mMaterial;
 };

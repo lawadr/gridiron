@@ -13,144 +13,144 @@ See LICENSE in root directory.
 class Type;
 
 class Size {
-	public:
-		Size()
-			: mX(0), mY(0), mZ(0)
-		{
-		}
+public:
+    Size()
+        : mX(0), mY(0), mZ(0)
+    {
+    }
 
-		Size(int x, int y, int z)
-			: mX(x)	, mY(y)	, mZ(z)
-		{
-		}
+    Size(int x, int y, int z)
+        : mX(x)	, mY(y)	, mZ(z)
+    {
+    }
 
-		int x() const {
-			return mX;
-		}
+    int x() const {
+        return mX;
+    }
 
-		void setX(int x) {
-			mX = x;
-		}
+    void setX(int x) {
+        mX = x;
+    }
 
-		int y() const {
-			return mY;
-		}
+    int y() const {
+        return mY;
+    }
 
-		void setY(int y) {
-			mY = y;
-		}
+    void setY(int y) {
+        mY = y;
+    }
 
-		int z() const {
-			return mZ;
-		}
+    int z() const {
+        return mZ;
+    }
 
-		void setZ(int z) {
-			mZ = z;
-		}
+    void setZ(int z) {
+        mZ = z;
+    }
 
-	private:
-		int mX;
-		int mY;
-		int mZ;
+private:
+    int mX;
+    int mY;
+    int mZ;
 };
 
 class Map {
-	public:
-		Map(const Size& size);
-		~Map();
+public:
+    Map(const Size& size);
+    ~Map();
 
-		TileSet* tileSet() const {
-			return mCatalogue->tileSet();
-		}
+    TileSet* tileSet() const {
+        return mCatalogue->tileSet();
+    }
 
-		TypeSet* typeSet() const {
-			return mCatalogue->typeSet();
-		}
+    TypeSet* typeSet() const {
+        return mCatalogue->typeSet();
+    }
 
-		Catalogue* catalogue() const {
-			return mCatalogue;
-		}
+    Catalogue* catalogue() const {
+        return mCatalogue;
+    }
 
-		PropertyList properties() const {
-			return mProperties;
-		}
+    PropertyList properties() const {
+        return mProperties;
+    }
 
-		void setProperties(PropertyList properties) {
-			mProperties = properties;
-		}
-		
-		const Size& size() const {
-			return mSize;
-		}
+    void setProperties(PropertyList properties) {
+        mProperties = properties;
+    }
 
-		const Cell& cell(const Position& position) const {
-			return mCells.at(cellIndex(position));
-		}
+    const Size& size() const {
+        return mSize;
+    }
 
-		void setCell(const Position& position, const Cell& cell) {
-			mCells.replace(cellIndex(position), cell);
-		}
+    const Cell& cell(const Position& position) const {
+        return mCells.at(cellIndex(position));
+    }
 
-		bool hasWall(const Position& position, bool eastWestFacing) const {
-			bool singlePosition = false;
-			int face;
-			Position positions[2];
+    void setCell(const Position& position, const Cell& cell) {
+        mCells.replace(cellIndex(position), cell);
+    }
 
-			if (eastWestFacing) {
-				face = 2;
-				
-				positions[0] = Position(position.x() - 1, position.y(), position.z());
-				positions[1] = position;
+    bool hasWall(const Position& position, bool eastWestFacing) const {
+        bool singlePosition = false;
+        int face;
+        Position positions[2];
 
-				if (position.x() <= 0) {
-					face = 4;
-					positions[0] = positions[1];
-					singlePosition = true;
-				} else if (position.x() >= mSize.x()) {
-					singlePosition = true;
-				}
-			} else {
-				face = 1;
+        if (eastWestFacing) {
+            face = 2;
 
-				positions[0] = position;
-				positions[1] = Position(position.x(), position.y() - 1, position.z());
+            positions[0] = Position(position.x() - 1, position.y(), position.z());
+            positions[1] = position;
 
-				if (position.y() <= 0) {
-					singlePosition = true;
-				} else if (position.y() >= mSize.y()) {
-					face = 3;
-					positions[0] = positions[1];
-					singlePosition = true;
-				}
-			}
+            if (position.x() <= 0) {
+                face = 4;
+                positions[0] = positions[1];
+                singlePosition = true;
+            } else if (position.x() >= mSize.x()) {
+                singlePosition = true;
+            }
+        } else {
+            face = 1;
 
-			if (cell(positions[0]).tile(face) != 0)
-				return true;
+            positions[0] = position;
+            positions[1] = Position(position.x(), position.y() - 1, position.z());
 
-			if (!singlePosition && (cell(positions[1]).tile(face + 2) != 0))
-				return true;
-			
-			return false;
-		}
+            if (position.y() <= 0) {
+                singlePosition = true;
+            } else if (position.y() >= mSize.y()) {
+                face = 3;
+                positions[0] = positions[1];
+                singlePosition = true;
+            }
+        }
 
-		Object* createObject(Type* type);
-		void destroyObject(Object* object);
+        if (cell(positions[0]).tile(face) != 0)
+            return true;
 
-		Object* object(int index) const;
-		int objectCount() const;
+        if (!singlePosition && (cell(positions[1]).tile(face + 2) != 0))
+            return true;
 
-	private:
-		Size mSize;
-		QVector<Cell> mCells;
-		QVector<Object*> mObjects;
-		PropertyList mProperties;
+        return false;
+    }
 
-		Catalogue* mCatalogue;
+    Object* createObject(Type* type);
+    void destroyObject(Object* object);
 
-		int cellIndex(const Position& position) const {
-			return position.x() + position.y() * mSize.x() + position.z() * mSize.x() * mSize.y();
-		}
+    Object* object(int index) const;
+    int objectCount() const;
 
-		//QVector<QVector<Wall>> mWallsX;
-		//QVector<QVector<Wall>> mWallsY;
+private:
+    Size mSize;
+    QVector<Cell> mCells;
+    QVector<Object*> mObjects;
+    PropertyList mProperties;
+
+    Catalogue* mCatalogue;
+
+    int cellIndex(const Position& position) const {
+        return position.x() + position.y() * mSize.x() + position.z() * mSize.x() * mSize.y();
+    }
+
+    //QVector<QVector<Wall>> mWallsX;
+    //QVector<QVector<Wall>> mWallsY;
 };

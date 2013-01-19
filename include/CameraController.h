@@ -11,115 +11,115 @@ See LICENSE in root directory.
 class MapView;
 
 class AbstractCameraController : public QObject {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		AbstractCameraController(QWidget* widget);
-		~AbstractCameraController();
+public:
+    AbstractCameraController(QWidget* widget);
+    ~AbstractCameraController();
 
-		bool eventFilter(QObject* watched, QEvent* e);
+    bool eventFilter(QObject* watched, QEvent* e);
 
-	protected:
-		void update();
+protected:
+    void update();
 
-		virtual void injectKeyPressEvent(QKeyEvent* keyEvent) {}
-		virtual void injectKeyReleaseEvent(QKeyEvent* keyEvent) {}
+    virtual void injectKeyPressEvent(QKeyEvent* keyEvent) {}
+    virtual void injectKeyReleaseEvent(QKeyEvent* keyEvent) {}
 
-		virtual void injectMousePressEvent(QMouseEvent* mouseEvent) {}
-		virtual void injectMouseMoveEvent(QMouseEvent* mouseEvent) {}
+    virtual void injectMousePressEvent(QMouseEvent* mouseEvent) {}
+    virtual void injectMouseMoveEvent(QMouseEvent* mouseEvent) {}
 
-		virtual void injectWheelEvent(QWheelEvent* wheelEvent) {}
-		
-		virtual void injectTimerEvent(QTimerEvent* timerEvent) {}
+    virtual void injectWheelEvent(QWheelEvent* wheelEvent) {}
 
-	private:
-		QWidget* mWidget;
+    virtual void injectTimerEvent(QTimerEvent* timerEvent) {}
+
+private:
+    QWidget* mWidget;
 };
 
 class CameraController : public AbstractCameraController {
-	public:
-		CameraController(QWidget* widget, Ogre::SceneManager* sceneManager, Ogre::Camera* camera);
-		~CameraController();
+public:
+    CameraController(QWidget* widget, Ogre::SceneManager* sceneManager, Ogre::Camera* camera);
+    ~CameraController();
 
-		Ogre::SceneManager* getSceneManager() const;
-		Ogre::Camera* getCamera() const;
+    Ogre::SceneManager* getSceneManager() const;
+    Ogre::Camera* getCamera() const;
 
-		float getY() const;
-		void setY(float y);
+    float getY() const;
+    void setY(float y);
 
-		void injectMousePressEvent(QMouseEvent* mouseEvent);
-		void injectMouseMoveEvent(QMouseEvent* mouseEvent);
+    void injectMousePressEvent(QMouseEvent* mouseEvent);
+    void injectMouseMoveEvent(QMouseEvent* mouseEvent);
 
-		void injectWheelEvent(QWheelEvent* wheelEvent);
+    void injectWheelEvent(QWheelEvent* wheelEvent);
 
-		void injectKeyPressEvent(QKeyEvent* keyEvent);
-		void injectKeyReleaseEvent(QKeyEvent* keyEvent);
+    void injectKeyPressEvent(QKeyEvent* keyEvent);
+    void injectKeyReleaseEvent(QKeyEvent* keyEvent);
 
-		void timerEvent(QTimerEvent* timerEvent);
-		void injectTimerEvent(QTimerEvent* timerEvent);
-		
-	private:
-		Ogre::SceneManager* sceneManager_;
-		Ogre::Camera* camera_;
+    void timerEvent(QTimerEvent* timerEvent);
+    void injectTimerEvent(QTimerEvent* timerEvent);
 
-		Ogre::SceneNode* node_;
+private:
+    Ogre::SceneManager* sceneManager_;
+    Ogre::Camera* camera_;
 
-		QPoint mousePosition_;
-		QSet<Qt::Key> keys_;
+    Ogre::SceneNode* node_;
 
-		Ogre::Real xRotation_;
-		Ogre::Real yRotation_;
-		
-		float y_;
+    QPoint mousePosition_;
+    QSet<Qt::Key> keys_;
 
-		QBasicTimer mTimer;
+    Ogre::Real xRotation_;
+    Ogre::Real yRotation_;
+
+    float y_;
+
+    QBasicTimer mTimer;
 };
 
 class MouseDrivenCameraController : public AbstractCameraController {
-	public:
-		MouseDrivenCameraController(QWidget* widget, Ogre::SceneManager* sceneManager, Ogre::Camera* camera);
-		~MouseDrivenCameraController();
+public:
+    MouseDrivenCameraController(QWidget* widget, Ogre::SceneManager* sceneManager, Ogre::Camera* camera);
+    ~MouseDrivenCameraController();
 
-		Ogre::SceneManager* getSceneManager() const;
-		Ogre::Camera* getCamera() const;
+    Ogre::SceneManager* getSceneManager() const;
+    Ogre::Camera* getCamera() const;
 
-		float y() const;
-		void setY(float y);
+    float y() const;
+    void setY(float y);
 
-		float minDistance() const;
-		void setMinDistance(float distance);
+    float minDistance() const;
+    void setMinDistance(float distance);
 
-		float maxDistance() const;
-		void setMaxDistance(float distance);
+    float maxDistance() const;
+    void setMaxDistance(float distance);
 
-		float zoomSpeed() const;
-		void setZoomSpeed(float speed);
+    float zoomSpeed() const;
+    void setZoomSpeed(float speed);
 
-	private:
-		Ogre::SceneManager* mSceneManager;
-		Ogre::Camera* mCamera;
+private:
+    Ogre::SceneManager* mSceneManager;
+    Ogre::Camera* mCamera;
 
-		Ogre::SceneNode* mNode;
+    Ogre::SceneNode* mNode;
 
-		float mMinDistance;
-		float mMaxDistance;
-		float mZoomSpeed;
-		float mY;
+    float mMinDistance;
+    float mMaxDistance;
+    float mZoomSpeed;
+    float mY;
 
-		Ogre::Real mRotationX;
-		Ogre::Real mRotationY;
+    Ogre::Real mRotationX;
+    Ogre::Real mRotationY;
 
-		QPoint mMousePosition;
-		QBasicTimer mTimer;
-		QSet<Qt::Key> mKeys;
-		
-		void injectMousePressEvent(QMouseEvent* mouseEvent);
-		void injectMouseMoveEvent(QMouseEvent* mouseEvent);
+    QPoint mMousePosition;
+    QBasicTimer mTimer;
+    QSet<Qt::Key> mKeys;
 
-		void injectWheelEvent(QWheelEvent* wheelEvent);
+    void injectMousePressEvent(QMouseEvent* mouseEvent);
+    void injectMouseMoveEvent(QMouseEvent* mouseEvent);
 
-		void injectKeyPressEvent(QKeyEvent* keyEvent);
-		void injectKeyReleaseEvent(QKeyEvent* keyEvent);
+    void injectWheelEvent(QWheelEvent* wheelEvent);
 
-		void timerEvent(QTimerEvent* timerEvent);
+    void injectKeyPressEvent(QKeyEvent* keyEvent);
+    void injectKeyReleaseEvent(QKeyEvent* keyEvent);
+
+    void timerEvent(QTimerEvent* timerEvent);
 };

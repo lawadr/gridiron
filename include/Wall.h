@@ -9,14 +9,14 @@ See LICENSE in root directory.
 class Tile;
 
 class Wall {
-	public:
-		Wall(int start, int end, Tile* mTile);
+public:
+    Wall(int start, int end, Tile* mTile);
 
-	private:
-		int mStart;
-		int mEnd;
+private:
+    int mStart;
+    int mEnd;
 
-		Tile* mTile;
-		//QVector<Tile*> mSide1;
-		//QVector<Tile*> mSide2;
+    Tile* mTile;
+    //QVector<Tile*> mSide1;
+    //QVector<Tile*> mSide2;
 };

@@ -12,40 +12,40 @@ class Object;
 class Region;
 
 class MapGeometry {
-	public:
-		MapGeometry(Ogre::SceneManager* sceneManager);
-		~MapGeometry();
+public:
+    MapGeometry(Ogre::SceneManager* sceneManager);
+    ~MapGeometry();
 
-		void setMap(Map* map);
+    void setMap(Map* map);
 
-		void setVisibility(float visibility);
+    void setVisibility(float visibility);
 
-		void update(int z);
-		void updateAll();
+    void update(int z);
+    void updateAll();
 
-		void addObject(Object* object);
+    void addObject(Object* object);
 
-	private:
-		struct Layer {
-			Ogre::SceneNode* layerNode;
-			Ogre::SceneNode* node;
-			Region* region;
-			QList<Ogre::Entity*> objects;
-		};
+private:
+    struct Layer {
+        Ogre::SceneNode* layerNode;
+        Ogre::SceneNode* node;
+        Region* region;
+        QList<Ogre::Entity*> objects;
+    };
 
-		typedef std::vector<Layer> LayerList;
+    typedef std::vector<Layer> LayerList;
 
-		Ogre::SceneManager* sceneManager_;
-		Ogre::SceneNode* rootNode_;
+    Ogre::SceneManager* sceneManager_;
+    Ogre::SceneNode* rootNode_;
 
-		std::vector<Ogre::TexturePtr> mTextures;
-		Ogre::TexturePtr mTileTexture;
-		std::vector<Ogre::MaterialPtr> mMaterials;
-		std::vector<Ogre::ManualObject*> mGeometry;
+    std::vector<Ogre::TexturePtr> mTextures;
+    Ogre::TexturePtr mTileTexture;
+    std::vector<Ogre::MaterialPtr> mMaterials;
+    std::vector<Ogre::ManualObject*> mGeometry;
 
-		Map* map_;
+    Map* map_;
 
-		LayerList layers_;
+    LayerList layers_;
 
-		void clear();
+    void clear();
 };

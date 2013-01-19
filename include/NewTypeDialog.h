@@ -15,20 +15,20 @@ class QSpinBox;
 class QDoubleSpinBox;
 
 class NewTypeDialog : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		NewTypeDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+public:
+    NewTypeDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-		Type* createType(TileSet* tileSet);
+    Type* createType(TileSet* tileSet);
 
-	private:
-		PreviewBox* mPreview;
-		QComboBox* mMesh;
+private:
+    PreviewBox* mPreview;
+    QComboBox* mMesh;
 
-		QSpinBox* mX;
-		QSpinBox* mY;
+    QSpinBox* mX;
+    QSpinBox* mY;
 
-	private slots:
-		void changeSize();
+    private slots:
+        void changeSize();
 };

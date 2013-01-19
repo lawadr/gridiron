@@ -9,24 +9,24 @@ class TileSet;
 class TypeSet;
 
 class Catalogue {
-	public:
-		Catalogue();
-		~Catalogue();
+public:
+    Catalogue();
+    ~Catalogue();
 
-		Category* root() const {
-			return mRoot;
-		}
+    Category* root() const {
+        return mRoot;
+    }
 
-		TileSet* tileSet() const {
-			return mTileSet;
-		}
+    TileSet* tileSet() const {
+        return mTileSet;
+    }
 
-		TypeSet* typeSet() const {
-			return mTypeSet;
-		}
+    TypeSet* typeSet() const {
+        return mTypeSet;
+    }
 
-	private:
-		Category* mRoot;
-		TileSet* mTileSet;
-		TypeSet* mTypeSet;
+private:
+    Category* mRoot;
+    TileSet* mTileSet;
+    TypeSet* mTypeSet;
 };

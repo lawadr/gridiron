@@ -10,21 +10,21 @@ See LICENSE in root directory.
 class Category;
 
 class Tile : public Item {
-	public:
-		Tile(int id, Category* category = 0);
-		~Tile();
+public:
+    Tile(int id, Category* category = 0);
+    ~Tile();
 
-		int id() const {
-			return mId;
-		}
+    int id() const {
+        return mId;
+    }
 
-		//Category* category() const;
+    //Category* category() const;
 
-		const std::string& material() const;
-		void setMaterial(const std::string& material);
+    const std::string& material() const;
+    void setMaterial(const std::string& material);
 
-	private:
-		int mId;
-		//Category* mCategory;
-		std::string mMaterial;
+private:
+    int mId;
+    //Category* mCategory;
+    std::string mMaterial;
 };

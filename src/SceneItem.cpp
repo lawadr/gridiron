@@ -12,23 +12,23 @@ See LICENSE in root directory.
 #include <OgreEntity.h>
 
 /*SceneItem::SceneItem(Object* object, Ogre::SceneManager* sceneManager)
-	: mObject(object)
-	, mSceneManager(sceneManager)
-	, mNode(0)
-	, mEntity(0)
-	, mGrid(0)
+: mObject(object)
+, mSceneManager(sceneManager)
+, mNode(0)
+, mEntity(0)
+, mGrid(0)
 {
-	mNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	mEntity = sceneManager->createEntity(object->type()->mesh());
-	mNode->attachObject(mEntity);
+mNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+mEntity = sceneManager->createEntity(object->type()->mesh());
+mNode->attachObject(mEntity);
 
 
 }*/
 
 SceneItem::SceneItem()
-	: mScene(0)
+    : mScene(0)
 {
 }
 
- SceneItem::~SceneItem() {
- }
+SceneItem::~SceneItem() {
+}

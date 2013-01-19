@@ -16,44 +16,44 @@ class QTreeView;
 class QModelIndex;
 
 class CatalogueExplorer : public QWidget {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		CatalogueExplorer(QWidget* parent = 0, Qt::WindowFlags flags = 0);
-		~CatalogueExplorer();
+public:
+    CatalogueExplorer(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    ~CatalogueExplorer();
 
-		Catalogue* catalogue() const;
-		void setCatalogue(Catalogue* catalogue);
+    Catalogue* catalogue() const;
+    void setCatalogue(Catalogue* catalogue);
 
-		void clear();
+    void clear();
 
-	signals:
-		void tileActivated(Tile* tile);
-		void typeActivated(Type* type);
-		void itemSelected(Item* item);
+signals:
+    void tileActivated(Tile* tile);
+    void typeActivated(Type* type);
+    void itemSelected(Item* item);
 
-	private:
-		Catalogue* mCatalogue;
-		QToolBox* mToolBox;
+private:
+    Catalogue* mCatalogue;
+    QToolBox* mToolBox;
 
-		QAction* mCreateTileAction;
-		QAction* mCreateTypeAction;
-		QAction* mCreateCategoryAction;
-		QAction* mDestroyItemAction;
+    QAction* mCreateTileAction;
+    QAction* mCreateTypeAction;
+    QAction* mCreateCategoryAction;
+    QAction* mDestroyItemAction;
 
-		struct {
-			QTreeView* view;
-			CategoryModel* model;
-		} mItemSets[3];
+    struct {
+        QTreeView* view;
+        CategoryModel* model;
+    } mItemSets[3];
 
-	private slots:
-		void createTile();
-		void createType();
-		void createCategory();
-		void destroyItem();
+    private slots:
+        void createTile();
+        void createType();
+        void createCategory();
+        void destroyItem();
 
-		void showContextMenu(const QPoint& position);
+        void showContextMenu(const QPoint& position);
 
-		void itemSelected(const QModelIndex& current);
-		void itemActivated(const QModelIndex& index);
+        void itemSelected(const QModelIndex& current);
+        void itemActivated(const QModelIndex& index);
 };

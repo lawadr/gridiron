@@ -7,21 +7,21 @@ See LICENSE in root directory.
 class Scene;
 
 class SceneItem {
-	public:
-		friend class Scene;
+public:
+    friend class Scene;
 
-		SceneItem();
-		virtual ~SceneItem();
+    SceneItem();
+    virtual ~SceneItem();
 
-		Scene* scene() const {
-			return mScene;
-		}
+    Scene* scene() const {
+        return mScene;
+    }
 
-	protected:
-		Scene* mScene;
+protected:
+    Scene* mScene;
 
-	private:
-		void setScene(Scene* scene) {
-			mScene = scene;
-		}
+private:
+    void setScene(Scene* scene) {
+        mScene = scene;
+    }
 };

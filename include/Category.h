@@ -8,37 +8,37 @@ See LICENSE in root directory.
 #include <QtCore/qlist.h>
 
 class Category : public Item {
-	public:
-		Category();
-		~Category();
+public:
+    Category();
+    ~Category();
 
-		bool isCategory() const;
-		
-		int childCount() const;
+    bool isCategory() const;
 
-		bool isAncestorOf(Item* category) const;
-		
-		int indexOf(Item* child) const;
-		Item* child(int index) const;
-		
-		void addChild(Item* child);
+    int childCount() const;
 
-		Item* removeChild(int index);
-		void removeChild(Item* child);
+    bool isAncestorOf(Item* category) const;
 
-		/*int itemCount() const;
+    int indexOf(Item* child) const;
+    Item* child(int index) const;
 
-		Item* item(int index) const;
+    void addChild(Item* child);
 
-		void addItem(Item* item);
+    Item* removeChild(int index);
+    void removeChild(Item* child);
 
-		Item* removeItem(int index);
-		void removeItem(Item* item);*/
+    /*int itemCount() const;
 
-	private:
-		typedef QList<Item*> ChildList;
-		//typedef QList<Item*> ItemList;
+    Item* item(int index) const;
 
-		ChildList mChildren;
-		//ItemList mItems;
+    void addItem(Item* item);
+
+    Item* removeItem(int index);
+    void removeItem(Item* item);*/
+
+private:
+    typedef QList<Item*> ChildList;
+    //typedef QList<Item*> ItemList;
+
+    ChildList mChildren;
+    //ItemList mItems;
 };

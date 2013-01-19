@@ -13,37 +13,37 @@ class SceneMouseEvent;
 class QKeyEvent;
 
 namespace Ogre {
-	class SceneManager;
+    class SceneManager;
 }
 
 class Scene : public QObject {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		friend class SceneView;
+public:
+    friend class SceneView;
 
-		Scene(QObject* parent = 0);
-		~Scene();
+    Scene(QObject* parent = 0);
+    ~Scene();
 
-		void addItem(SceneItem* item);
-		void removeItem(SceneItem* item);
+    void addItem(SceneItem* item);
+    void removeItem(SceneItem* item);
 
-	signals:
-		void changed();
+signals:
+    void changed();
 
-	protected:
-		Ogre::SceneManager* sceneManager() const;
+protected:
+    Ogre::SceneManager* sceneManager() const;
 
-		virtual void keyPressEvent(QKeyEvent* keyEvent);
-		virtual void keyReleaseEvent(QKeyEvent* keyEvent);
+    virtual void keyPressEvent(QKeyEvent* keyEvent);
+    virtual void keyReleaseEvent(QKeyEvent* keyEvent);
 
-		virtual void mouseMoveEvent(SceneMouseEvent* mouseEvent);
-		virtual void mousePressEvent(SceneMouseEvent* mouseEvent);
-		virtual void mouseReleaseEvent(SceneMouseEvent* mouseEvent);
+    virtual void mouseMoveEvent(SceneMouseEvent* mouseEvent);
+    virtual void mousePressEvent(SceneMouseEvent* mouseEvent);
+    virtual void mouseReleaseEvent(SceneMouseEvent* mouseEvent);
 
-		void update();
+    void update();
 
-	private:
-		Ogre::SceneManager* mSceneManager;
-		QList<SceneItem*> mSceneItems;
+private:
+    Ogre::SceneManager* mSceneManager;
+    QList<SceneItem*> mSceneItems;
 };

@@ -12,32 +12,32 @@ See LICENSE in root directory.
 class Category;
 
 class Item {
-	public:
-		Item();
-		virtual ~Item();
+public:
+    Item();
+    virtual ~Item();
 
-		virtual bool isCategory() const;
+    virtual bool isCategory() const;
 
-		Category* toCategory();
-		const Category* toCategory() const;
+    Category* toCategory();
+    const Category* toCategory() const;
 
-		Category* parent() const;
-		void setParent(Category* parent);
+    Category* parent() const;
+    void setParent(Category* parent);
 
-		int childNumber();
+    int childNumber();
 
-		QString name() const;
-		void setName(QString name);
+    QString name() const;
+    void setName(QString name);
 
-		PropertyList properties() const;
-		void setProperties(PropertyList properties);
+    PropertyList properties() const;
+    void setProperties(PropertyList properties);
 
-	protected:
-		Category* mParent;
+protected:
+    Category* mParent;
 
-	private:
-		QString mName;
-		PropertyList mProperties;
+private:
+    QString mName;
+    PropertyList mProperties;
 };
 
 #endif

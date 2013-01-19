@@ -7,7 +7,7 @@ See LICENSE in root directory.
 #include "Wall.h"
 
 Wall::Wall(int start, int end, Tile* mTile)
-	: mStart(start)
-	, mEnd(end)
+    : mStart(start)
+    , mEnd(end)
 {
 }

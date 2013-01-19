@@ -10,24 +10,24 @@ See LICENSE in root directory.
 #include <OGRE/Ogre.h>
 
 class OgreWidget : public QWidget {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		OgreWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
-		virtual ~OgreWidget();
+public:
+    OgreWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    virtual ~OgreWidget();
 
-		QPaintEngine* paintEngine() const;
+    QPaintEngine* paintEngine() const;
 
-	protected:
-		Ogre::RenderWindow* renderWindow() const;
-		bool isInitialised() const;
+protected:
+    Ogre::RenderWindow* renderWindow() const;
+    bool isInitialised() const;
 
-		virtual void initialise() = 0;
+    virtual void initialise() = 0;
 
-		void paintEvent(QPaintEvent* paintEvent);
-		void resizeEvent(QResizeEvent* resizeEvent);
-		void showEvent(QShowEvent* showEvent);
+    void paintEvent(QPaintEvent* paintEvent);
+    void resizeEvent(QResizeEvent* resizeEvent);
+    void showEvent(QShowEvent* showEvent);
 
-	private:
-		Ogre::RenderWindow* mRenderWindow;
+private:
+    Ogre::RenderWindow* mRenderWindow;
 };

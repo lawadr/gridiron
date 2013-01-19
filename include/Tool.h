@@ -15,59 +15,59 @@ class Map;
 class MapGeometry;
 
 namespace Ogre {
-	class Ray;
+    class Ray;
 }
 
 class Tool {
-	public:
-		Tool(Ogre::SceneManager* sceneManager)
-			: mSceneManager(sceneManager)
-			, mMap(0)
-			, mFloor(0)
-		{
-		}
+public:
+    Tool(Ogre::SceneManager* sceneManager)
+        : mSceneManager(sceneManager)
+        , mMap(0)
+        , mFloor(0)
+    {
+    }
 
-		virtual ~Tool() {
-		}
+    virtual ~Tool() {
+    }
 
-		void setMap(Map* map) {
-			mMap = map;
-		}
+    void setMap(Map* map) {
+        mMap = map;
+    }
 
-		void setFloor(int floor) {
-			mFloor = floor;
-		}
+    void setFloor(int floor) {
+        mFloor = floor;
+    }
 
-		virtual void activate() {
-		}
+    virtual void activate() {
+    }
 
-		virtual void deactivate() {
-		}
+    virtual void deactivate() {
+    }
 
-		virtual bool keyPressEvent(QKeyEvent* keyEvent) {
-			return false;
-		}
+    virtual bool keyPressEvent(QKeyEvent* keyEvent) {
+        return false;
+    }
 
-		virtual bool keyReleaseEvent(QKeyEvent* keyEvent) {
-			return false;
-		}
+    virtual bool keyReleaseEvent(QKeyEvent* keyEvent) {
+        return false;
+    }
 
-		virtual bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray) {
-			return false;
-		}
+    virtual bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray) {
+        return false;
+    }
 
-		virtual bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray) {
-			return false;
-		}
+    virtual bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray) {
+        return false;
+    }
 
-		virtual bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray) {
-			return false;
-		}
+    virtual bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray) {
+        return false;
+    }
 
-	protected:
-		Ogre::SceneManager* mSceneManager;
-		Map* mMap;
-		int mFloor;
+protected:
+    Ogre::SceneManager* mSceneManager;
+    Map* mMap;
+    int mFloor;
 };
 
 #endif
