@@ -7,8 +7,8 @@ See LICENSE in root directory.
 #include "Tile.h"
 
 Tile::Tile(int id, Category* category)
-	: mId(id)
-	//, mCategory(category)
+    : mId(id)
+    //, mCategory(category)
 {
 }
 
@@ -16,13 +16,13 @@ Tile::~Tile() {
 }
 
 /*Category* Tile::category() const {
-	return mCategory;
+return mCategory;
 }*/
 
 const std::string& Tile::material() const {
-	return mMaterial;
+    return mMaterial;
 }
 
 void Tile::setMaterial(const std::string& material) {
-	mMaterial = material;
+    mMaterial = material;
 }

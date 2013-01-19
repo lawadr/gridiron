@@ -20,56 +20,56 @@ See LICENSE in root directory.
 #include <OGRE/OgreMaterialManager.h>
 
 NewTileDialog::NewTileDialog(QWidget* parent, Qt::WindowFlags flags)
-	: QDialog(parent, flags)
+    : QDialog(parent, flags)
 {
-	setWindowTitle(tr("New Tile"));
-	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    setWindowTitle(tr("New Tile"));
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-	QBoxLayout* layout = new QBoxLayout(QBoxLayout::Down, this);
-	layout->setSizeConstraint(QLayout::SetFixedSize);
+    QBoxLayout* layout = new QBoxLayout(QBoxLayout::Down, this);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
 
-	QFormLayout* formLayout = new QFormLayout;
+    QFormLayout* formLayout = new QFormLayout;
 
-	ResourceModel* model = new ResourceModel(this);
-	model->setResourceManager(Ogre::MaterialManager::getSingletonPtr());
-	model->setResourceGroup("General");
-	
-	mName = new QLineEdit;
-	formLayout->addRow(tr("Name: "), mName);
+    ResourceModel* model = new ResourceModel(this);
+    model->setResourceManager(Ogre::MaterialManager::getSingletonPtr());
+    model->setResourceGroup("General");
 
-	mMaterial = new QComboBox;
-	mMaterial->setModel(model);
-	formLayout->addRow(tr("Material: "), mMaterial);
+    mName = new QLineEdit;
+    formLayout->addRow(tr("Name: "), mName);
 
-	layout->addLayout(formLayout);
+    mMaterial = new QComboBox;
+    mMaterial->setModel(model);
+    formLayout->addRow(tr("Material: "), mMaterial);
 
-	QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    layout->addLayout(formLayout);
 
-	layout->addWidget(buttonBox);
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-	//QSettings settings;
-	//settings.beginGroup("NewMapDialog");
-	//xSize_->setValue(settings.value("xSize", 32).toInt());
-	//ySize_->setValue(settings.value("ySize", 32).toInt());
-	//zSize_->setValue(settings.value("zSize", 1).toInt());
-	//settings.endGroup();
+    layout->addWidget(buttonBox);
+
+    //QSettings settings;
+    //settings.beginGroup("NewMapDialog");
+    //xSize_->setValue(settings.value("xSize", 32).toInt());
+    //ySize_->setValue(settings.value("ySize", 32).toInt());
+    //zSize_->setValue(settings.value("zSize", 1).toInt());
+    //settings.endGroup();
 }
 
 Tile* NewTileDialog::createTile(TileSet* tileSet) {
-	Tile* tile = 0;
-	if (exec() == QDialog::Accepted) {
-		//QSettings settings;
-		//settings.beginGroup("NewMapDialog");
-		//settings.setValue("xSize", xSize_->value());
-		//settings.setValue("ySize", ySize_->value());
-		//settings.setValue("zSize", zSize_->value());
-		//settings.endGroup();
+    Tile* tile = 0;
+    if (exec() == QDialog::Accepted) {
+        //QSettings settings;
+        //settings.beginGroup("NewMapDialog");
+        //settings.setValue("xSize", xSize_->value());
+        //settings.setValue("ySize", ySize_->value());
+        //settings.setValue("zSize", zSize_->value());
+        //settings.endGroup();
 
-		tile = static_cast<Tile*>(tileSet->createItem());
-		tile->setName(mName->text());
-		tile->setMaterial(mMaterial->currentText().toStdString());
-	}
-	return tile;
+        tile = static_cast<Tile*>(tileSet->createItem());
+        tile->setName(mName->text());
+        tile->setMaterial(mMaterial->currentText().toStdString());
+    }
+    return tile;
 }

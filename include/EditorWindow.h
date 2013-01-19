@@ -24,87 +24,87 @@ class QSortFilterProxyModel;
 class QTableView;
 
 class EditorWindow : public QMainWindow {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		EditorWindow();
+public:
+    EditorWindow();
 
-	protected:
-		void closeEvent(QCloseEvent* closeEvent);
+protected:
+    void closeEvent(QCloseEvent* closeEvent);
 
-	private:
-		QAction* newAction_;
-		QAction* openAction_;
-		QAction* saveAction_;
-		QAction* saveAsAction_;
-		QAction* saveAllAction_;
-		QAction* exitAction_;
+private:
+    QAction* newAction_;
+    QAction* openAction_;
+    QAction* saveAction_;
+    QAction* saveAsAction_;
+    QAction* saveAllAction_;
+    QAction* exitAction_;
 
-		QAction* undoAction_;
-		QAction* redoAction_;
+    QAction* undoAction_;
+    QAction* redoAction_;
 
-		QAction* cutAction_;
-		QAction* copyAction_;
-		QAction* pasteAction_;
-		QAction* deleteAction_;
+    QAction* cutAction_;
+    QAction* copyAction_;
+    QAction* pasteAction_;
+    QAction* deleteAction_;
 
-		QAction* gridAction_;
-		QAction* upAction_;
-		QAction* downAction_;
+    QAction* gridAction_;
+    QAction* upAction_;
+    QAction* downAction_;
 
-		QAction* floorAction_;
-		QAction* wallAction_;
-		QAction* paintAction_;
-		QAction* objectAction_;
+    QAction* floorAction_;
+    QAction* wallAction_;
+    QAction* paintAction_;
+    QAction* objectAction_;
 
-		QAction* aboutAction_;
+    QAction* aboutAction_;
 
-		QAction* mAddTileAction;
-		QAction* mAddTypeAction;
-		QAction* mAddCategoryAction;
+    QAction* mAddTileAction;
+    QAction* mAddTypeAction;
+    QAction* mAddCategoryAction;
 
-		QUndoGroup* undoGroup_;
+    QUndoGroup* undoGroup_;
 
-		MapView* mMapView;
+    MapView* mMapView;
 
-		CatalogueExplorer* mCatalogueExplorer;
+    CatalogueExplorer* mCatalogueExplorer;
 
-		PropertiesModel* mPropertiesModel;
-		QTableView* mPropertiesView;
+    PropertiesModel* mPropertiesModel;
+    QTableView* mPropertiesView;
 
-		QDockWidget* explorerDock_;
-		QDockWidget* previewDock_;
+    QDockWidget* explorerDock_;
+    QDockWidget* previewDock_;
 
-		QTabBar* tabBar_;
+    QTabBar* tabBar_;
 
-		MapDocument* currentMap_;
-		QList<MapDocument*> maps_;
+    MapDocument* currentMap_;
+    QList<MapDocument*> maps_;
 
-		Item* currentItem;
+    Item* currentItem;
 
-		void createActions();
-		void createMenus();
-		void createToolBars();
-		void createDocks();
+    void createActions();
+    void createMenus();
+    void createToolBars();
+    void createDocks();
 
-	private slots:
-		void newMap();
-		void open();
-		void save();
-		void saveAs();
-		void saveAll();
+    private slots:
+        void newMap();
+        void open();
+        void save();
+        void saveAs();
+        void saveAll();
 
-		void about();
+        void about();
 
-		void itemSelected(Item* item);
+        void itemSelected(Item* item);
 
-		void updateStatus(QPoint position);
+        void updateStatus(QPoint position);
 
-		void changeTab(int index);
-		void closeTab(int index);
-		void moveTab(int from, int to);
+        void changeTab(int index);
+        void closeTab(int index);
+        void moveTab(int from, int to);
 
-	private:
-		bool confirmSave(MapDocument* mapDocument);
-		bool save(MapDocument* mapDocument);
+private:
+    bool confirmSave(MapDocument* mapDocument);
+    bool save(MapDocument* mapDocument);
 };

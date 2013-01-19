@@ -9,33 +9,33 @@ See LICENSE in root directory.
 class Tile;
 
 class FloorTool : public Tool {
-	public:
-		FloorTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
-		~FloorTool();
+public:
+    FloorTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
+    ~FloorTool();
 
-		Tile* tile() const;
-		void setTile(Tile* tile);
+    Tile* tile() const;
+    void setTile(Tile* tile);
 
-		void activate();
-		void deactivate();
+    void activate();
+    void deactivate();
 
-		bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mousePressEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
 
-	private:
-		bool mClearing;
-		bool mSelecting;
-		QPoint mStart;
-		QPoint mCurrent;
-		
-		Ogre::MaterialPtr mMaterial;
-		Ogre::SceneNode* mNode;
-		Ogre::ManualObject* mRectangle;
+private:
+    bool mClearing;
+    bool mSelecting;
+    QPoint mStart;
+    QPoint mCurrent;
 
-		MapGeometry* mMapGeometry;
-		Tile* mTile;
+    Ogre::MaterialPtr mMaterial;
+    Ogre::SceneNode* mNode;
+    Ogre::ManualObject* mRectangle;
 
-		QPoint calculatePosition(const Ogre::Ray& ray);
-		void createRectangle();
+    MapGeometry* mMapGeometry;
+    Tile* mTile;
+
+    QPoint calculatePosition(const Ogre::Ray& ray);
+    void createRectangle();
 };

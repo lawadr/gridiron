@@ -9,25 +9,25 @@ See LICENSE in root directory.
 class Tile;
 
 class PaintTool : public Tool {
-	public:
-		PaintTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
-		~PaintTool();
+public:
+    PaintTool(Ogre::SceneManager* sceneManager, MapGeometry* mapGeometry);
+    ~PaintTool();
 
-		Tile* tile() const;
-		void setTile(Tile* tile);
+    Tile* tile() const;
+    void setTile(Tile* tile);
 
-		bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
-		bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseMoveEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
+    bool mouseReleaseEvent(QMouseEvent* mouseEvent, const Ogre::Ray& ray);
 
-	private:
-		int mSide;
-		QPoint mPosition;
+private:
+    int mSide;
+    QPoint mPosition;
 
-		Ogre::SceneNode* mNode;
-		Ogre::ManualObject* mRectangle;
+    Ogre::SceneNode* mNode;
+    Ogre::ManualObject* mRectangle;
 
-		MapGeometry* mMapGeometry;
-		Tile* mTile;
+    MapGeometry* mMapGeometry;
+    Tile* mTile;
 
-		void createRectangle();
+    void createRectangle();
 };

@@ -8,38 +8,38 @@ See LICENSE in root directory.
 #include "TileSet.h"
 
 Map::Map(const Size& size)
-	: mSize(size)
-	, mCells(size.x() * size.y() * size.z())
-	//, mWallsX(size.y() + 1)
-	//, mWallsY(size.x() + 1)
+    : mSize(size)
+    , mCells(size.x() * size.y() * size.z())
+    //, mWallsX(size.y() + 1)
+    //, mWallsY(size.x() + 1)
 {
-	mCatalogue = new Catalogue;
+    mCatalogue = new Catalogue;
 }
 
 Map::~Map() {
-	QVector<Object*>::iterator i;
-	for (i = mObjects.begin(); i != mObjects.end(); ++i)
-		delete *i;
+    QVector<Object*>::iterator i;
+    for (i = mObjects.begin(); i != mObjects.end(); ++i)
+        delete *i;
 
-	delete mCatalogue;
+    delete mCatalogue;
 }
 
 Object* Map::createObject(Type* type) {
-	Object* object = new Object(type);
-	mObjects.push_back(object);
-	return object;
+    Object* object = new Object(type);
+    mObjects.push_back(object);
+    return object;
 }
 
 void Map::destroyObject(Object* object) {
-	int index = mObjects.indexOf(object);
-	mObjects.remove(index);
-	delete object;
+    int index = mObjects.indexOf(object);
+    mObjects.remove(index);
+    delete object;
 }
 
 Object* Map::object(int index) const {
-	return mObjects.at(index);
+    return mObjects.at(index);
 }
 
 int Map::objectCount() const {
-	return mObjects.size();
+    return mObjects.size();
 }

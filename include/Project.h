@@ -11,94 +11,94 @@ See LICENSE in root directory.
 class World;
 
 struct FloorType2 {
-	QString name;
-	QString material;
+    QString name;
+    QString material;
 
-	void read(QXmlStreamReader& stream) {
-		stream.readNextStartElement();
-		if (stream.qualifiedName() == "Name") {
-			name = stream.readElementText();
-		} else if (stream.qualifiedName() == "Material") {
-			material = stream.readElementText();
-		}
-	}
+    void read(QXmlStreamReader& stream) {
+        stream.readNextStartElement();
+        if (stream.qualifiedName() == "Name") {
+            name = stream.readElementText();
+        } else if (stream.qualifiedName() == "Material") {
+            material = stream.readElementText();
+        }
+    }
 
-	void write(QXmlStreamWriter& stream) const {
-		stream.writeTextElement("Name", name);
-		stream.writeTextElement("Material", material);
+    void write(QXmlStreamWriter& stream) const {
+        stream.writeTextElement("Name", name);
+        stream.writeTextElement("Material", material);
 
-		stream.writeEndElement();
-	}
+        stream.writeEndElement();
+    }
 };
 
 struct WallType2 {
-	QString name;
-	QString material;
+    QString name;
+    QString material;
 
-	void read(QXmlStreamReader& stream) {
-		stream.readNextStartElement();
-		if (stream.qualifiedName() == "Name") {
-			name = stream.readElementText();
-		} else if (stream.qualifiedName() == "Material") {
-			material = stream.readElementText();
-		}
-	}
+    void read(QXmlStreamReader& stream) {
+        stream.readNextStartElement();
+        if (stream.qualifiedName() == "Name") {
+            name = stream.readElementText();
+        } else if (stream.qualifiedName() == "Material") {
+            material = stream.readElementText();
+        }
+    }
 
-	void write(QXmlStreamWriter& stream) const {
-		stream.writeStartElement("Wall");
+    void write(QXmlStreamWriter& stream) const {
+        stream.writeStartElement("Wall");
 
-		stream.writeTextElement("Name", name);
-		stream.writeTextElement("Material", material);
+        stream.writeTextElement("Name", name);
+        stream.writeTextElement("Material", material);
 
-		stream.writeEndElement();
-	}
+        stream.writeEndElement();
+    }
 };
 
 struct ObjectType2 {
-	QString name;
-	QString mesh;
+    QString name;
+    QString mesh;
 
-	void read(QXmlStreamReader& stream) {
-		stream.readNextStartElement();
-		if (stream.qualifiedName() == "Name") {
-			name = stream.readElementText();
-		} else if (stream.qualifiedName() == "Mesh") {
-			mesh = stream.readElementText();
-		}
-	}
+    void read(QXmlStreamReader& stream) {
+        stream.readNextStartElement();
+        if (stream.qualifiedName() == "Name") {
+            name = stream.readElementText();
+        } else if (stream.qualifiedName() == "Mesh") {
+            mesh = stream.readElementText();
+        }
+    }
 
-	void write(QXmlStreamWriter& stream) const {
-		stream.writeStartElement("Object");
+    void write(QXmlStreamWriter& stream) const {
+        stream.writeStartElement("Object");
 
-		stream.writeTextElement("Name", name);
-		stream.writeTextElement("Mesh", mesh);
+        stream.writeTextElement("Name", name);
+        stream.writeTextElement("Mesh", mesh);
 
-		stream.writeEndElement();
-	}
+        stream.writeEndElement();
+    }
 };
 
 class Project2 {
-	public:
-		Project2();
-		~Project2();
+public:
+    Project2();
+    ~Project2();
 
-		bool open(const QString& filename);
-		bool save();
-		void close();
+    bool open(const QString& filename);
+    bool save();
+    void close();
 
-		bool isOpen();
+    bool isOpen();
 
-	private:
-		QString name_;
-		QString location_;
-		QString fileName_;
+private:
+    QString name_;
+    QString location_;
+    QString fileName_;
 
-		QVector<FloorType2> floorTypes_;
-		QVector<WallType2> wallTypes_;
-		QVector<ObjectType2> objectTypes_;
+    QVector<FloorType2> floorTypes_;
+    QVector<WallType2> wallTypes_;
+    QVector<ObjectType2> objectTypes_;
 
-		World* world_;
+    World* world_;
 
-		void loadTypes();
-		void saveTypes();
+    void loadTypes();
+    void saveTypes();
 };

@@ -13,41 +13,41 @@ Type::~Type() {
 }
 
 const QSize& Type::size() const {
-	return mSize;
+    return mSize;
 }
 
 void Type::setSize(const QSize& size) {
-	mSize = size;
+    mSize = size;
 }
 
 const Ogre::String& Type::mesh() const {
-	return mMesh;
+    return mMesh;
 }
 
 void Type::setMesh(const Ogre::String& mesh) {
-	mMesh = mesh;
+    mMesh = mesh;
 }
 
 const Ogre::Vector3& Type::offset() const {
-	return mOffset;
+    return mOffset;
 }
 
 void Type::setOffset(const Ogre::Vector3& offset) {
-	mOffset = offset;
+    mOffset = offset;
 }
 
 Ogre::Radian Type::rotation() const {
-	return mRotation;
+    return mRotation;
 }
 
 void Type::setRotation(Ogre::Radian rotation) {
-	mRotation = rotation;
+    mRotation = rotation;
 }
 
 Ogre::Real Type::scale() const {
-	return mScale;
+    return mScale;
 }
 
 void Type::setScale(Ogre::Real scale) {
-	mScale = scale;
+    mScale = scale;
 }

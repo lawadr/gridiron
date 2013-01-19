@@ -11,30 +11,30 @@ See LICENSE in root directory.
 #include <OGRE/OgreMath.h>
 
 class Type : public Item {
-	public:
-		Type();
-		~Type();
+public:
+    Type();
+    ~Type();
 
-		const QSize& size() const;
-		void setSize(const QSize& size);
+    const QSize& size() const;
+    void setSize(const QSize& size);
 
-		const Ogre::String& mesh() const;
-		void setMesh(const Ogre::String& mesh);
+    const Ogre::String& mesh() const;
+    void setMesh(const Ogre::String& mesh);
 
-		const Ogre::Vector3& offset() const;
-		void setOffset(const Ogre::Vector3& offset);
+    const Ogre::Vector3& offset() const;
+    void setOffset(const Ogre::Vector3& offset);
 
-		Ogre::Radian rotation() const;
-		void setRotation(Ogre::Radian rotation);
+    Ogre::Radian rotation() const;
+    void setRotation(Ogre::Radian rotation);
 
-		Ogre::Real scale() const;
-		void setScale(Ogre::Real scale);
-		
-	private:
-		QSize mSize;
+    Ogre::Real scale() const;
+    void setScale(Ogre::Real scale);
 
-		Ogre::String mMesh;
-		Ogre::Vector3 mOffset;
-		Ogre::Radian mRotation;
-		Ogre::Real mScale;
+private:
+    QSize mSize;
+
+    Ogre::String mMesh;
+    Ogre::Vector3 mOffset;
+    Ogre::Radian mRotation;
+    Ogre::Real mScale;
 };

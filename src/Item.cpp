@@ -8,7 +8,7 @@ See LICENSE in root directory.
 #include "Category.h"
 
 Item::Item()
-	: mParent(0)
+    : mParent(0)
 {
 }
 
@@ -16,41 +16,41 @@ Item::~Item() {
 }
 
 bool Item::isCategory() const {
-	return false;
+    return false;
 }
 
 Category* Item::toCategory() {
-	return (isCategory()) ? static_cast<Category*>(this) : 0;
+    return (isCategory()) ? static_cast<Category*>(this) : 0;
 }
 
 const Category* Item::toCategory() const {
-	return (isCategory()) ? static_cast<const Category*>(this) : 0;
+    return (isCategory()) ? static_cast<const Category*>(this) : 0;
 }
 
 Category* Item::parent() const {
-	return mParent;
+    return mParent;
 }
 
 void Item::setParent(Category* parent) {
-	mParent = parent;
+    mParent = parent;
 }
 
 int Item::childNumber() {
-	return (mParent) ? mParent->indexOf(this) : 0;
+    return (mParent) ? mParent->indexOf(this) : 0;
 }
 
 QString Item::name() const {
-	return mName;
+    return mName;
 }
 
 void Item::setName(QString name) {
-	mName = name;
+    mName = name;
 }
 
 PropertyList Item::properties() const {
-	return mProperties;
+    return mProperties;
 }
 
 void Item::setProperties(PropertyList properties) {
-	mProperties = properties;
+    mProperties = properties;
 }

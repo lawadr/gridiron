@@ -11,21 +11,21 @@ class QLineEdit;
 class QPushButton;
 
 class NewProjectDialog : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		NewProjectDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+public:
+    NewProjectDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-		QString getName() const;
-		QString getLocation() const;
+    QString getName() const;
+    QString getLocation() const;
 
-	private:
-		QLineEdit* nameEdit_;
-		QLineEdit* locationEdit_;
-		QPushButton* okButton_;
+private:
+    QLineEdit* nameEdit_;
+    QLineEdit* locationEdit_;
+    QPushButton* okButton_;
 
-	private slots:
-		void nameChange();
-		void locationChange();
-		void browse();
+    private slots:
+        void nameChange();
+        void locationChange();
+        void browse();
 };

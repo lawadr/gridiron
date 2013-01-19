@@ -22,86 +22,86 @@ See LICENSE in root directory.
 #include <OGRE/OgreMeshManager.h>
 
 NewTypeDialog::NewTypeDialog(QWidget* parent, Qt::WindowFlags flags)
-	: QDialog(parent, flags)
+    : QDialog(parent, flags)
 {
-	setWindowTitle(tr("New Type"));
-	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    setWindowTitle(tr("New Type"));
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-	QBoxLayout* layout = new QBoxLayout(QBoxLayout::Down, this);
-	layout->setSizeConstraint(QLayout::SetFixedSize);
+    QBoxLayout* layout = new QBoxLayout(QBoxLayout::Down, this);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
 
-	mPreview = new PreviewBox;
-	layout->addWidget(mPreview);
+    mPreview = new PreviewBox;
+    layout->addWidget(mPreview);
 
-	QFormLayout* formLayout = new QFormLayout;
+    QFormLayout* formLayout = new QFormLayout;
 
-	ResourceGroupModel* model = new ResourceGroupModel(this);
-	model->setPattern("*.mesh");
-	model->setResourceGroup("General");
-	Ogre::ResourceGroupManager* fesf = Ogre::ResourceGroupManager::getSingletonPtr();
+    ResourceGroupModel* model = new ResourceGroupModel(this);
+    model->setPattern("*.mesh");
+    model->setResourceGroup("General");
+    Ogre::ResourceGroupManager* fesf = Ogre::ResourceGroupManager::getSingletonPtr();
 
-	QBoxLayout* sizeLayout = new QBoxLayout(QBoxLayout::LeftToRight);
+    QBoxLayout* sizeLayout = new QBoxLayout(QBoxLayout::LeftToRight);
 
-	QLabel* xLabel = new QLabel("X:");
-	sizeLayout->addWidget(xLabel);
+    QLabel* xLabel = new QLabel("X:");
+    sizeLayout->addWidget(xLabel);
 
-	mX = new QSpinBox;
-	mX->setMinimum(1);
-	connect(mX, SIGNAL(valueChanged(int)), this, SLOT(changeSize()));
-	sizeLayout->addWidget(mX, 1);
+    mX = new QSpinBox;
+    mX->setMinimum(1);
+    connect(mX, SIGNAL(valueChanged(int)), this, SLOT(changeSize()));
+    sizeLayout->addWidget(mX, 1);
 
-	QLabel* yLabel = new QLabel("Y:");
-	sizeLayout->addWidget(yLabel);
+    QLabel* yLabel = new QLabel("Y:");
+    sizeLayout->addWidget(yLabel);
 
-	mY = new QSpinBox;
-	mY->setMinimum(1);
-	connect(mY, SIGNAL(valueChanged(int)), this, SLOT(changeSize()));
-	sizeLayout->addWidget(mY, 1);
+    mY = new QSpinBox;
+    mY->setMinimum(1);
+    connect(mY, SIGNAL(valueChanged(int)), this, SLOT(changeSize()));
+    sizeLayout->addWidget(mY, 1);
 
-	layout->addLayout(sizeLayout);
+    layout->addLayout(sizeLayout);
 
-	mMesh = new QComboBox;
-	mMesh->setModel(model);
-	connect(mMesh, SIGNAL(currentIndexChanged(const QString&)), mPreview, SLOT(setMesh(QString)));
-	formLayout->addRow(tr("Mesh:"), mMesh);
+    mMesh = new QComboBox;
+    mMesh->setModel(model);
+    connect(mMesh, SIGNAL(currentIndexChanged(const QString&)), mPreview, SLOT(setMesh(QString)));
+    formLayout->addRow(tr("Mesh:"), mMesh);
 
-	layout->addLayout(formLayout);
+    layout->addLayout(formLayout);
 
-	QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-	layout->addWidget(buttonBox);
+    layout->addWidget(buttonBox);
 
-	//QSettings settings;
-	//settings.beginGroup("NewMapDialog");
-	//xSize_->setValue(settings.value("xSize", 32).toInt());
-	//ySize_->setValue(settings.value("ySize", 32).toInt());
-	//zSize_->setValue(settings.value("zSize", 1).toInt());
-	//settings.endGroup();
+    //QSettings settings;
+    //settings.beginGroup("NewMapDialog");
+    //xSize_->setValue(settings.value("xSize", 32).toInt());
+    //ySize_->setValue(settings.value("ySize", 32).toInt());
+    //zSize_->setValue(settings.value("zSize", 1).toInt());
+    //settings.endGroup();
 }
 
 Type* NewTypeDialog::createType(TileSet* tileSet) {
-	Type* type = 0;
-	if (exec() == QDialog::Accepted) {
-		//QSettings settings;
-		//settings.beginGroup("NewMapDialog");
-		//settings.setValue("xSize", xSize_->value());
-		//settings.setValue("ySize", ySize_->value());
-		//settings.setValue("zSize", zSize_->value());
-		//settings.endGroup();
+    Type* type = 0;
+    if (exec() == QDialog::Accepted) {
+        //QSettings settings;
+        //settings.beginGroup("NewMapDialog");
+        //settings.setValue("xSize", xSize_->value());
+        //settings.setValue("ySize", ySize_->value());
+        //settings.setValue("zSize", zSize_->value());
+        //settings.endGroup();
 
-		type = new Type;
-		type->setSize(QSize(mX->value(), mY->value()));
-		type->setMesh(mPreview->mesh());
-		type->setOffset(mPreview->offset());
-		type->setRotation(mPreview->rotation());
-		type->setScale(mPreview->scale());
-	}
-	return type;
+        type = new Type;
+        type->setSize(QSize(mX->value(), mY->value()));
+        type->setMesh(mPreview->mesh());
+        type->setOffset(mPreview->offset());
+        type->setRotation(mPreview->rotation());
+        type->setScale(mPreview->scale());
+    }
+    return type;
 }
 
 void NewTypeDialog::changeSize() {
-	QSize size(mX->value(), mY->value());
-	mPreview->setSize(size);
+    QSize size(mX->value(), mY->value());
+    mPreview->setSize(size);
 }

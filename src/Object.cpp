@@ -10,8 +10,8 @@ See LICENSE in root directory.
 #include <QtCore/qpoint.h>
 
 Object::Object(Type* type)
-	: mType(type)
-	//, mRotation(ROTATION_0)
+    : mType(type)
+    //, mRotation(ROTATION_0)
 {
 }
 
@@ -19,34 +19,34 @@ Object::~Object() {
 }
 
 Type* Object::type() const {
-	return mType;
+    return mType;
 }
 
 PropertyList Object::properties() const {
-	return mProperties;
+    return mProperties;
 }
 
 void Object::setProperties(PropertyList properties) {
-	mProperties = properties;
+    mProperties = properties;
 }
 
 QRect Object::boundingRectangle() const {
-	const QSize& size = mType->size();
+    const QSize& size = mType->size();
 
-	QPoint point1(-((size.width() - 1) >> 1), -((size.height() - 1) >> 1));
-	QPoint point2(size.width() >> 1, size.height() >> 1);
+    QPoint point1(-((size.width() - 1) >> 1), -((size.height() - 1) >> 1));
+    QPoint point2(size.width() >> 1, size.height() >> 1);
 
-	//Angle angle(mRotation / 90);
-	mAngle.rotate(point1);
-	mAngle.rotate(point2);
+    //Angle angle(mRotation / 90);
+    mAngle.rotate(point1);
+    mAngle.rotate(point2);
 
-	QRect rectangle;
-	rectangle.setLeft(std::min(point1.x(), point2.x()));
-	rectangle.setTop(std::min(point1.y(), point2.y()));
-	rectangle.setWidth(abs(point1.x()) + abs(point2.x()));
-	rectangle.setHeight(abs(point1.y()) + abs(point2.y()));
+    QRect rectangle;
+    rectangle.setLeft(std::min(point1.x(), point2.x()));
+    rectangle.setTop(std::min(point1.y(), point2.y()));
+    rectangle.setWidth(abs(point1.x()) + abs(point2.x()));
+    rectangle.setHeight(abs(point1.y()) + abs(point2.y()));
 
-	rectangle.translate(mPosition.x(), mPosition.y());
+    rectangle.translate(mPosition.x(), mPosition.y());
 
-	return rectangle;
+    return rectangle;
 }

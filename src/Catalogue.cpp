@@ -9,16 +9,18 @@ See LICENSE in root directory.
 #include "TileSet.h"
 
 Catalogue::Catalogue() {
-	mRoot = new Category;
+    mRoot = new Category;
 
-	mTileSet = new TileSet;
-	mTypeSet = new TypeSet;
+    mTileSet = new TileSet;
+    mTypeSet = new TypeSet;
 
-	mRoot->addChild(mTileSet->root());
-	mRoot->addChild(mTypeSet->root());
+    mRoot->addChild(mTileSet->root());
+    mRoot->addChild(mTypeSet->root());
 }
 
 Catalogue::~Catalogue() {
-	delete mTileSet;
-	delete mTypeSet;
+    delete mTileSet;
+    delete mTypeSet;
+
+    delete mRoot;
 }

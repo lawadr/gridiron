@@ -10,15 +10,15 @@ class Map;
 class QSpinBox;
 
 class NewMapDialog : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		NewMapDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+public:
+    NewMapDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-		Map* createMap();
+    Map* createMap();
 
-	private:
-		QSpinBox* xSize_;
-		QSpinBox* ySize_;
-		QSpinBox* zSize_;
+private:
+    QSpinBox* xSize_;
+    QSpinBox* ySize_;
+    QSpinBox* zSize_;
 };
