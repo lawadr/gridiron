@@ -8,13 +8,20 @@ See LICENSE in root directory.
 #include "Scene.h"
 #include "SceneEvent.h"
 
+#include <QtGui/qapplication.h>
+
 SceneView::SceneView(QWidget* parent, Qt::WindowFlags flags)
     : OgreWidget(parent, flags)
     , mScene(0)
+    , mViewport(0)
+    , mCamera(0)
 {
+    setMouseTracking(true);
 }
 
 SceneView::~SceneView() {
+    if (mCamera)
+        mScene->sceneManager()->destroyCamera(mCamera);
 }
 
 Scene* SceneView::scene() const {
@@ -26,11 +33,18 @@ void SceneView::setScene(Scene* scene) {
         return;
 
     if (mScene) {
-        disconnect(mScene, SIGNAL(changed()), this, SLOT(update()));
+        disconnect(mScene, SIGNAL(updated()), this, SLOT(update()));
+        mScene->sceneManager()->destroyCamera(mCamera);
+        mCamera = 0;
     }
 
     if (scene) {
-        connect(scene, SIGNAL(changed()), this, SLOT(update()));
+        connect(scene, SIGNAL(updated()), this, SLOT(update()));
+        mCamera = mScene->createCamera();
+        if (mViewport)
+            mViewport->setCamera(mCamera);
+        else if (isInitialised())
+            mViewport = renderWindow()->addViewport(mCamera);
     }
 
     mScene = scene;
@@ -38,40 +52,59 @@ void SceneView::setScene(Scene* scene) {
 
 void SceneView::keyPressEvent(QKeyEvent* keyEvent) {
     if (mScene)
-        mScene->keyPressEvent(keyEvent);
+        QApplication::sendEvent(mScene, keyEvent);
 }
 
 void SceneView::keyReleaseEvent(QKeyEvent* keyEvent) {
     if (mScene)
-        mScene->keyReleaseEvent(keyEvent);
+        QApplication::sendEvent(mScene, keyEvent);
+}
+
+void SceneView::mouseDoubleClickEvent(QMouseEvent* mouseEvent) {
+    if (mScene) {
+        SceneMouseEvent sceneMouseEvent(SceneMouseEvent::DOUBLE_CLICK_TYPE);
+        fillMouseEvent(sceneMouseEvent, mouseEvent);
+        QApplication::sendEvent(mScene, &sceneMouseEvent);
+    }
 }
 
 void SceneView::mouseMoveEvent(QMouseEvent* mouseEvent) {
     if (mScene) {
-        SceneMouseEvent* sceneMouseEvent = new SceneMouseEvent(SceneMouseEvent::RELEASE_TYPE);
-        fillMouseEvent(mouseEvent, sceneMouseEvent);
-        mScene->mouseMoveEvent(sceneMouseEvent);
+        SceneMouseEvent sceneMouseEvent(SceneMouseEvent::MOVE_TYPE);
+        fillMouseEvent(sceneMouseEvent, mouseEvent);
+        QApplication::sendEvent(mScene, &sceneMouseEvent);
     }
 }
 
 void SceneView::mousePressEvent(QMouseEvent* mouseEvent) {
     if (mScene) {
-        SceneMouseEvent* sceneMouseEvent = new SceneMouseEvent(SceneMouseEvent::RELEASE_TYPE);
-        fillMouseEvent(mouseEvent, sceneMouseEvent);
-        mScene->mousePressEvent(sceneMouseEvent);
+        SceneMouseEvent sceneMouseEvent(SceneMouseEvent::PRESS_TYPE);
+        fillMouseEvent(sceneMouseEvent, mouseEvent);
+        QApplication::sendEvent(mScene, &sceneMouseEvent);
     }
 }
 
 void SceneView::mouseReleaseEvent(QMouseEvent* mouseEvent) {
     if (mScene) {
-        SceneMouseEvent* sceneMouseEvent = new SceneMouseEvent(SceneMouseEvent::RELEASE_TYPE);
-        fillMouseEvent(mouseEvent, sceneMouseEvent);
-        mScene->mouseReleaseEvent(sceneMouseEvent);
+        SceneMouseEvent sceneMouseEvent(SceneMouseEvent::RELEASE_TYPE);
+        fillMouseEvent(sceneMouseEvent, mouseEvent);
+        QApplication::sendEvent(mScene, &sceneMouseEvent);
     }
 }
 
-void SceneView::fillMouseEvent(const QMouseEvent* mouseEvent, SceneMouseEvent* sceneMouseEvent) const {
-    sceneMouseEvent->setButton(mouseEvent->button());
-    sceneMouseEvent->setButtons(mouseEvent->buttons());
-    sceneMouseEvent->setRay(mCamera->getCameraToViewportRay(mouseEvent->x() / width(), mouseEvent->y() / height()));
+void SceneView::wheelEvent(QWheelEvent* wheelEvent) {
+    if (mScene)
+        QApplication::sendEvent(mScene, wheelEvent);
 }
+
+void SceneView::initialise() {
+    if (mCamera)
+        mViewport = renderWindow()->addViewport(mCamera);
+}
+
+void SceneView::fillMouseEvent(SceneMouseEvent& sceneMouseEvent, const QMouseEvent* mouseEvent) const {
+    sceneMouseEvent.setButton(mouseEvent->button());
+    sceneMouseEvent.setButtons(mouseEvent->buttons());
+    sceneMouseEvent.setRay(mCamera->getCameraToViewportRay(mouseEvent->x() / width(), mouseEvent->y() / height()));
+}
+

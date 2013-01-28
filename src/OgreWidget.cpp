@@ -55,7 +55,7 @@ void OgreWidget::showEvent(QShowEvent* showEvent) {
     if (!isInitialised()) {
         static Ogre::NameGenerator windowNameGenerator("OgreWidgetWindow");
 
-        Ogre::String title = windowNameGenerator.generate();//"Game";
+        Ogre::String title = windowNameGenerator.generate();
         unsigned int sizeX = width();
         unsigned int sizeY = height();
         bool fullScreen = false;

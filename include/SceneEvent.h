@@ -23,10 +23,10 @@ private:
 
 class SceneMouseEvent : public SceneEvent {
 public:
-    static const QEvent::Type MOVE_TYPE;
-    static const QEvent::Type PRESS_TYPE;
-    static const QEvent::Type RELEASE_TYPE;
-    static const QEvent::Type DOUBLE_CLICK_TYPE;
+    static const QEvent::Type MOVE_TYPE = static_cast<QEvent::Type>(5000);
+    static const QEvent::Type PRESS_TYPE = static_cast<QEvent::Type>(5001);
+    static const QEvent::Type RELEASE_TYPE = static_cast<QEvent::Type>(5002);
+    static const QEvent::Type DOUBLE_CLICK_TYPE = static_cast<QEvent::Type>(5003);
 
     SceneMouseEvent(QEvent::Type type)
         : SceneEvent(type)
