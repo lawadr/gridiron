@@ -6,44 +6,55 @@ See LICENSE in root directory.
 
 #include <QtCore/qobject.h>
 
-class SceneView;
 class SceneItem;
 class SceneMouseEvent;
 
 class QKeyEvent;
+class QWheelEvent;
 
 namespace Ogre {
     class SceneManager;
+    class Camera;
+    class Ray;
 }
 
 class Scene : public QObject {
     Q_OBJECT
 
 public:
-    friend class SceneView;
-
     Scene(QObject* parent = 0);
     ~Scene();
+
+    Ogre::SceneManager* sceneManager() const;
+
+    void update();
 
     void addItem(SceneItem* item);
     void removeItem(SceneItem* item);
 
+    Ogre::Camera* createCamera();
+    void destroyCamera(Ogre::Camera* camera);
+
+    virtual bool event(QEvent* event);
+
 signals:
-    void changed();
+    void updated();
 
 protected:
-    Ogre::SceneManager* sceneManager() const;
-
     virtual void keyPressEvent(QKeyEvent* keyEvent);
     virtual void keyReleaseEvent(QKeyEvent* keyEvent);
 
+    virtual void mouseDoubleClickEvent(SceneMouseEvent* mouseEvent);
     virtual void mouseMoveEvent(SceneMouseEvent* mouseEvent);
     virtual void mousePressEvent(SceneMouseEvent* mouseEvent);
     virtual void mouseReleaseEvent(SceneMouseEvent* mouseEvent);
 
-    void update();
+    virtual void wheelEvent(QWheelEvent* wheelEvent);
 
+    virtual SceneItem* grabItem(const Ogre::Ray& ray) const;
+    
 private:
     Ogre::SceneManager* mSceneManager;
     QList<SceneItem*> mSceneItems;
+    SceneItem* mFocusedSceneItem;
 };

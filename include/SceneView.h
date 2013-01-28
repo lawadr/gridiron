@@ -23,13 +23,19 @@ protected:
     virtual void keyPressEvent(QKeyEvent* keyEvent);
     virtual void keyReleaseEvent(QKeyEvent* keyEvent);
 
+    virtual void mouseDoubleClickEvent(QMouseEvent* mouseEvent);
     virtual void mouseMoveEvent(QMouseEvent* mouseEvent);
     virtual void mousePressEvent(QMouseEvent* mouseEvent);
     virtual void mouseReleaseEvent(QMouseEvent* mouseEvent);
 
+    virtual void wheelEvent(QWheelEvent* wheelEvent);
+
+    virtual void initialise();
+
 private:
     Scene* mScene;
+    Ogre::Viewport* mViewport;
     Ogre::Camera* mCamera;
 
-    void fillMouseEvent(const QMouseEvent* mouseEvent, SceneMouseEvent* sceneMouseEvent) const;
+    void fillMouseEvent(SceneMouseEvent& sceneMouseEvent, const QMouseEvent* mouseEvent) const;
 };
